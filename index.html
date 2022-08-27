@@ -18,10 +18,9 @@
             margin: 0;
         }
         </style>
-        <title></title>
+        <title>EVALUATION DU BESOIN DANS LE SECTEUR L'EHA</title>
     </head>
     <body>
-        <h2> Evaluation du besoin dans le secteur de l'EHA </h2>
         <div id="map">
         </div>
         <script src="js/qgis2web_expressions.js"></script>
@@ -95,19 +94,24 @@
                         <td colspan="2">' + (feature.properties['id'] !== null ? autolinker.link(feature.properties['id'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Z_Interv'] !== null ? autolinker.link(feature.properties['Z_Interv'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Z_Interv</th>\
+                        <td>' + (feature.properties['Z_Interv'] !== null ? autolinker.link(feature.properties['Z_Interv'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Besoin_EHA'] !== null ? autolinker.link(feature.properties['Besoin_EHA'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Besoin_EHA</th>\
+                        <td>' + (feature.properties['Besoin_EHA'] !== null ? autolinker.link(feature.properties['Besoin_EHA'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Image'] !== null ? '<img src="images/' + String(feature.properties['Image']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
+                        <th scope="row">Image</th>\
+                        <td>' + (feature.properties['Image'] !== null ? '<img src="images/' + String(feature.properties['Image']).replace(/[\\\/:]/g, '_').trim() + '">' : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Date_Creat'] !== null ? autolinker.link(feature.properties['Date_Creat'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Date_Creat</th>\
+                        <td>' + (feature.properties['Date_Creat'] !== null ? autolinker.link(feature.properties['Date_Creat'].toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Date_Modif'] !== null ? autolinker.link(feature.properties['Date_Modif'].toLocaleString()) : '') + '</td>\
+                        <th scope="row">Date_Modif</th>\
+                        <td>' + (feature.properties['Date_Modif'] !== null ? autolinker.link(feature.properties['Date_Modif'].toLocaleString()) : '') + '</td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
@@ -173,6 +177,16 @@
         });
         bounds_group.addLayer(layer_EHA_1);
         map.addLayer(layer_EHA_1);
+            var title = new L.Control();
+            title.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info');
+                this.update();
+                return this._div;
+            };
+            title.update = function () {
+                this._div.innerHTML = '<h2>EVALUATION DU BESOIN DANS LE SECTEUR L\'EHA</h2>';
+            };
+            title.addTo(map);
         var osmGeocoder = new L.Control.Geocoder({
             collapsed: true,
             position: 'topleft',
